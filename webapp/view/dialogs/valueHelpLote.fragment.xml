@@ -1,0 +1,11 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="Lotes"
+		items="{filtrosLote>/lote}"
+		liveChange=".onLoteDialogSearch"
+		confirm=".onLoteDialogClose"
+		cancel=".onLoteDialogClose" >
+			<StandardListItem
+			 title="{filtrosLote>CHARG}" />
+	</SelectDialog>
+</core:FragmentDefinition>

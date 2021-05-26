@@ -1,0 +1,148 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Ventas.Vitrinav2.controller.Client"
+	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page showFooter="true" showHeader="false">
+		<VBox width="100%" fitContainer="false">
+			<Panel expandable="false" expanded="false">
+				<content>
+					<f:SimpleForm id="SimpleFormDisplay354" editable="false" layout="ResponsiveGridLayout" title="Ingreso de cliente esporádico" labelSpanXL="3"
+						labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0"
+						columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+						<f:content>
+							<Label text="{i18n>cartFiscalIdentifier}" class="sapUiTinyMarginTop"/>
+							<Input id="rutCliente" placeholder="Ingrese identificador fiscal.."
+							value="{transientCliente>/rut}"/>
+							
+							<Label text="{i18n>cartFiscalIdentifierTheSecond}" class="sapUiTinyMarginTop"/>
+							<Input id="rutClienteTwo"  placeholder="Ingrese DUI.."
+							value="{transientCliente>/secondId}"/>
+							
+							<Label text="{i18n>cartName}" class="sapUiTinyMarginTop"/>
+							<Input id="nombre"  placeholder="Ingrese nombre.."
+							value="{transientCliente>/name1}"/>
+							
+							<Label text="{i18n>cartAddress}" class="sapUiTinyMarginTop"/>
+							<Input id="direccion"  placeholder="Ingrese dirección.."
+							value="{transientCliente>/street}"/>
+							
+							<Label text="{i18n>cartPhoneNumber}" class="sapUiTinyMarginTop"/>
+							<Input id="telefono"  placeholder="Ingrese teléfono.."
+							value="{transientCliente>/phone}"/>
+							
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</Panel>
+		</VBox>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<ToolbarSpacer/>
+				<Button type="Emphasized" text="{i18n>clientViewButton}" press="replaceClienteModel">
+					<layoutData><OverflowToolbarLayoutData priority="NeverOverflow"/></layoutData>
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>
+<!--<mvc:View
+    controllerName="Ventas.Vitrinav2.controller.Client"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<Page 
+		title="{i18n>clientTitle}"
+		showNavButton="true"
+		navButtonPress="onNavBack">
+	
+		<content>
+
+            <VBox class="sapUiSmallMargin" height="70vh" alignContent="Center" alignItems="Center">
+               
+               	<f:SimpleForm 
+                    id="SimpleFormChange354wide"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    labelSpanXL="2"
+                    labelSpanL="3"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false">
+                    <f:content>
+                        <Label 
+                            text="{i18n>cartFiscalIdentifier}" 
+                            labelFor="rutCliente"
+                            class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                            width="10vw"/>
+                        <Input 
+                            id="rutCliente" 
+                            class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                            width="20vw"
+                            value="{transientCliente>/rut}"/>
+                            
+                        <Label 
+                            text="{i18n>cartFiscalIdentifierTheSecond}" 
+                            labelFor="rutClienteTwo"
+                            class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                            width="10vw"/>
+                        <Input 
+                            id="rutClienteTwo" 
+                            class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                            width="20vw"
+                            value="{transientCliente>/secondId}"/>
+
+                        <Label 
+                            text="{i18n>cartName}"
+                            class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                            width="10vw"/>
+                        <Input 
+                            id="nombre" 
+                            class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                            width="20vw"
+                            value="{transientCliente>/name1}"/>
+
+                        <Label
+                            text="{i18n>cartAddress}"
+                            labelFor="direccion"
+                            class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                            width="10vw"/>
+                        <Input
+                            id="direccion"
+                            class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                            width="20vw"
+                            value="{transientCliente>/street}"/>
+                    
+                        <Label 
+                            text="{i18n>cartPhoneNumber}" 
+                            labelFor="telefono" 
+                            class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                            width="10vw"/>
+                        <Input 
+                            id="telefono"
+                            class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+                            width="20vw"
+                            type="Tel"
+                            value="{transientCliente>/phone}"/>
+                    </f:content>
+                </f:SimpleForm>
+                <HBox class="sapUiSmallMargin" width="100vw" alignContent="Center" alignItems="Center" justifyContent="SpaceAround" >
+                    <Button
+                        type="Accept"
+                        press="replaceClienteModel"
+                        text="{i18n>clientViewButton}">
+                    </Button>
+                </HBox>
+            </VBox>
+
+		</content>
+	</Page>
+</mvc:View>-->
