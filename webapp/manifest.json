@@ -1,7 +1,7 @@
 {
 	"_version": "1.12.0",
 	"sap.app": {
-		"id": "ar.com.puntoventa",
+		"id": "Ventas.Vitrinav2",
 		"type": "application",
 		"i18n": "i18n/i18n.properties",
 		"applicationVersion": {
@@ -42,7 +42,7 @@
 	"sap.ui5": {
 		"flexEnabled": false,
 		"rootView": {
-			"viewName": "ar.com.puntoventa.view.app",
+			"viewName": "Ventas.Vitrinav2.view.app",
 			"type": "XML",
 			"async": true,
 			"id": "app"
@@ -63,7 +63,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "ar.com.puntoventa.i18n.i18n"
+					"bundleName": "Ventas.Vitrinav2.i18n.i18n"
 				}
 			},
 			"pedidos": {
@@ -99,7 +99,7 @@
 				"routerClass": "sap.m.routing.Router",
 				"viewType": "XML",
 				"async": true,
-				"viewPath": "ar.com.puntoventa.view",
+				"viewPath": "Ventas.Vitrinav2.view",
 				"controlAggregation": "pages",
 				"controlId": "app",
 				"clearControlAggregation": false
@@ -143,5 +143,9 @@
 				}
 			}
 		}
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zsd_puntoventa2/webapp",
+		"_version": "1.1.0"
 	}
 }

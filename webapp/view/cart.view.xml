@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="ar.com.puntoventa.controller.cart"
+    controllerName="Ventas.Vitrinav2.controller.cart"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
 	xmlns:l="sap.ui.layout"

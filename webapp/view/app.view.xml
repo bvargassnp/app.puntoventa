@@ -1,8 +1,8 @@
-<mvc:View controllerName="ar.com.puntoventa.controller.app" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+<mvc:View controllerName="Ventas.Vitrinav2.controller.app" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<mvc:XMLView viewName="ar.com.puntoventa.view.Main"></mvc:XMLView>
+				<mvc:XMLView viewName="Ventas.Vitrinav2.view.Main"></mvc:XMLView>
 			</pages>
 		</App>
 	</Shell>

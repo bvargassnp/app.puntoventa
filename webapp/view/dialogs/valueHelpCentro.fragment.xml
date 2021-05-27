@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="Centros"
+		items="{filtrosCentro>/centros}"
+		liveChange=".onCentroDialogSearch"
+		confirm=".onCentroDialogClose"
+		cancel=".onCentroDialogClose" >
+			<StandardListItem
+			  title="{filtrosCentro>WERKS}"
+			  description="{filtrosCentro>NAME1}" />
+	</SelectDialog>
+</core:FragmentDefinition>	

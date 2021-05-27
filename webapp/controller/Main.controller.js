@@ -4,30 +4,39 @@ sap.ui.define([
 	"sap/m/MessageBox",
 	"sap/ui/model/Filter",
 	'sap/ui/model/Sorter',
+	"sap/ui/core/IconPool",
+	"sap/m/Dialog",
+	"sap/m/DialogType",
+	"sap/m/Button",
+	"sap/m/ButtonType",
+	"sap/m/List",
+	"sap/m/StandardListItem",
+	"sap/m/Text",
 	'sap/m/TablePersoController',
 	"sap/ui/model/FilterOperator",
-	"ar/com/puntoventa/model/cart",
-	"ar/com/puntoventa/Services/Services",
-	"ar/com/puntoventa/model/DemoPersoService",
-	"ar/com/puntoventa/utils/ExcelDownloaderHelper",
-	"ar/com/puntoventa/model/columns",
-	"ar/com/puntoventa/model/filterModel",
-	"ar/com/puntoventa/model/filtrosLote",
-	"ar/com/puntoventa/model/filtrosMaterial",
-	"ar/com/puntoventa/model/filtrosEspecie"
-], function (Controller, JSONModel, MessageBox, Filter, Sorter, TablePersoController, FilterOperator, cart, Services, DemoPersoService,
-	ExcelDownloadHelper, columns, filterModel, filtrosLote, filtrosMaterial, filtrosEspecie) {
+	"Ventas/Vitrinav2/model/cart",
+	"Ventas/Vitrinav2/Services/Services",
+	"Ventas/Vitrinav2/model/DemoPersoService",
+	"Ventas/Vitrinav2/utils/ExcelDownloaderHelper",
+	"Ventas/Vitrinav2/model/columns",
+	"Ventas/Vitrinav2/model/filterModel",
+	"Ventas/Vitrinav2/model/filtrosLote",
+	"Ventas/Vitrinav2/model/filtrosMaterial",
+	"Ventas/Vitrinav2/model/filtrosEspecie",
+	"Ventas/Vitrinav2/model/filtrosCentro",
+	"Ventas/Vitrinav2/model/filtrosAlmacen",
+	"Ventas/Vitrinav2/model/filtrosCanal"
+], function (Controller, JSONModel, MessageBox, Filter, Sorter, IconPool, Dialog, DialogType, Button, ButtonType, List,
+	StandardListItem, Text, TablePersoController, FilterOperator, cart, Services, DemoPersoService,
+	ExcelDownloadHelper, columns, filterModel, filtrosLote, filtrosMaterial, filtrosEspecie, filtrosCentro, filtrosAlmacen, filtrosCanal) {
 	"use strict";
-	return Controller.extend("ar.com.puntoventa.controller.Main", {
+	return Controller.extend("Ventas.Vitrinav2.controller.Main", {
 
 		onInit: function () {
-			this.callProductosService();
+			filtrosCanal.initializeModel();
 			filterModel.initializeModel();
-			this.getMatchcodeLotes();
-			this.getNumeroMaterial();
-			this.getEspecies();
-			columns.initializeModel();
-			this._oMultiInputLote = this.getView().byId("loteInput");
+			this.getCanalService();
+
 			this._oTPC = new TablePersoController({
 				table: this.byId("tablaProductos"),
 				//specify the first part of persistence ids e.g. 'demoApp-productsTable-dimensionsCol'
@@ -64,21 +73,78 @@ sap.ui.define([
 					};
 				}
 			};
-			//this._oMultiInput.setTokens(this._getDefaultTokens());
+		},
 
-			//this.initializePagination();
-			/*this.byId("myScrollContainer").attachBrowserEvent("scroll", (event) => {
-				this.onGrowTable(event)
+		getCanalService: async function () {
+			let oModel = filtrosCanal.initializeModel();
+			const {
+				results
+			} = await Services.getCanales();
+			filtrosCanal.setProperty("/canales", results);
+			filtrosCanal.updateModel();
+		},
+
+		onAfterInit: function (selectedCode) {
+			this.callProductosService(selectedCode);
+			filterModel.initializeModel();
+			this.getMatchcodeLotes();
+			this.getNumeroMaterial();
+			this.getEspecies();
+			this.getMatchcodeCentro();
+			this.getMatchcodeAlmacen();
+			columns.initializeModel();
+			this._oMultiInputLote = this.getView().byId("loteInput");
+		},
+
+		onHandlePopUpCanal: function () {
+			this.oDefaultDialog = undefined;
+			if (!this.oDefaultDialog) {
+				var oItem = new sap.m.StandardListItem({
+					title: "Descripción: {filtrosCanal>VTEXT}",
+					description: "Código: {filtrosCanal>VTWEG}"
+				});
+				this.oDefaultDialog = new Dialog({
+					title: "Seleccione canal de distribución",
+					content: [new sap.m.List({
+						id: "dialogCanal",
+						mode: "SingleSelect",
+						items: {
+							path: 'filtrosCanal>/canales',
+							template: oItem
+						}
+					})],
+					beginButton: new sap.m.Button({
+						type: sap.m.ButtonType.Emphasized,
+						text: 'Confirmar',
+						press: function (oEvent) {
+							this.onConfirmCanal(oEvent);
+						}.bind(this)
+					})
+				});
+				var oModel = filtrosCanal.getModel();
+				this.oDefaultDialog.setModel(oModel, "filtrosCanal");
+				// to get access to the controller's model
+				this.getView().addDependent(this.oDefaultDialog);
+			}
+
+			this.oDefaultDialog.setEscapeHandler((oEscapeHandler) => {
+				oEscapeHandler.reject();
 			});
 
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			oRouter
-				.getRoute("main")
-				.attachMatched(this.reset, this);
+			this.oDefaultDialog.open();
+		},
 
-			oRouter
-				.getRoute("main")
-				.attachMatched(this.fetchProductos, this);*/
+		onConfirmCanal: function (oEvent) {
+			if (this.oDefaultDialog.getContent()[0].getSelectedItem() !== null) {
+				let codigo = this.oDefaultDialog.getContent()[0].getSelectedItem().getProperty("description");
+				let splited = codigo.split(' ');
+				let selectedCode = splited[1];
+				filtrosCanal.getModel().setProperty("/canalSeleccionado", selectedCode);
+				this.oDefaultDialog.close();
+				this.onAfterInit(selectedCode);
+			} else {
+				sap.m.MessageToast.show("Por favor, seleccione un canal de distribución");
+			}
 		},
 
 		onDataExport: function (oEvent) {
@@ -111,7 +177,7 @@ sap.ui.define([
 			var sQuery = oEvent.getSource().getValue();
 			if (sQuery && sQuery.length > 0) {
 				aFilters.push(new Filter([
-					new sap.ui.model.Filter("MAKTX", FilterOperator.Contains, sQuery)
+					new sap.ui.model.Filter("MATNR", FilterOperator.Contains, sQuery)
 				], false));
 			}
 
@@ -123,7 +189,7 @@ sap.ui.define([
 
 		handleViewSettingsDialogButtonPressed: function (oEvent) {
 			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("ar.com.puntoventa.view.dialogs.TableDialog", this);
+				this._oDialog = sap.ui.xmlfragment("Ventas.Vitrinav2.view.dialogs.TableDialog", this);
 			}
 			// toggle compact style
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
@@ -202,33 +268,59 @@ sap.ui.define([
 			let oModel = filtrosLote.initializeModel();
 			const {
 				results
-			} = await Services.getLotes(filter);
+			} = await Services.getLotes();
 
 			oModel.setProperty("/lotes", results);
 		},
 
+		onHandleLote: function () {
+			if (!this._oLoteDialog) {
+				this._oLoteDialog = sap.ui.xmlfragment("Ventas.Vitrinav2.view.dialogs.valueHelpLote", this);
+				this.getView().addDependent(this._oLoteDialog);
+			}
+			this._oLoteDialog.open();
+		},
+
+		onLoteDialogSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("value"),
+				oFilter = new Filter("CHARG", FilterOperator.Contains, sValue);
+			oEvent.getSource().getBinding("items").filter([oFilter]);
+		},
+
+		onLoteDialogClose: function (oEvent) {
+			var selected,
+				oSelectedItem = oEvent.getParameter("selectedItem");
+
+			oEvent.getSource().getBinding("items").filter([]);
+
+			if (!oSelectedItem) {
+				//this._oCentroDialog.destroy();
+				return;
+			}
+			selected = oSelectedItem.getTitle();
+			filterModel.getModel().setProperty("/lote", selected);
+		},
+
 		getNumeroMaterial: async function () {
-			var filter = [
-				new Filter("MATNR", "Contains", "")
-			];
 			let oModel = filtrosMaterial.initializeModel();
 			const {
 				results
-			} = await Services.getMateriales(filter);
+			} = await Services.getMateriales();
+
 			oModel.setProperty("/materiales", results);
 		},
 
 		onHandleMaterial: function () {
 			if (!this._oMaterialDialog) {
-				this._oMaterialDialog = sap.ui.xmlfragment("ar.com.puntoventa.view.dialogs.valueHelpMaterial", this);
+				this._oMaterialDialog = sap.ui.xmlfragment("Ventas.Vitrinav2.view.dialogs.valueHelpMaterial", this);
 				this.getView().addDependent(this._oMaterialDialog);
 			}
 			this._oMaterialDialog.open();
 		},
 
 		onMaterialDialogSearch: function (oEvent) {
-			var sValue = oEvent.getParameter("value"),
-				oFilter = new Filter("MATNR", FilterOperator.Contains, sValue);
+			var sValue = oEvent.getParameter("value");
+			var oFilter = new Filter("MATNR", FilterOperator.Contains, sValue);
 			oEvent.getSource().getBinding("items").filter([oFilter]);
 		},
 
@@ -245,7 +337,81 @@ sap.ui.define([
 			selected = oSelectedItem.getTitle();
 			filterModel.getModel().setProperty("/material", selected);
 		},
-		
+
+		getMatchcodeCentro: async function () {
+			let oModel = filtrosCentro.initializeModel();
+			const {
+				results
+			} = await Services.getCentros();
+
+			oModel.setProperty("/centros", results);
+		},
+
+		onHandleCentro: function () {
+			if (!this._oCentroDialog) {
+				this._oCentroDialog = sap.ui.xmlfragment("Ventas.Vitrinav2.view.dialogs.valueHelpCentro", this);
+				this.getView().addDependent(this._oCentroDialog);
+			}
+			this._oCentroDialog.open();
+		},
+
+		onCentroDialogSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("value"),
+				oFilter = new Filter("WERKS", FilterOperator.Contains, sValue);
+			oEvent.getSource().getBinding("items").filter([oFilter]);
+		},
+
+		onCentroDialogClose: function (oEvent) {
+			var selected,
+				oSelectedItem = oEvent.getParameter("selectedItem");
+
+			oEvent.getSource().getBinding("items").filter([]);
+
+			if (!oSelectedItem) {
+				//this._oCentroDialog.destroy();
+				return;
+			}
+			selected = oSelectedItem.getTitle();
+			filterModel.getModel().setProperty("/centro", selected);
+		},
+
+		getMatchcodeAlmacen: async function () {
+			let oModel = filtrosAlmacen.initializeModel();
+			const {
+				results
+			} = await Services.getAlmacenes();
+
+			oModel.setProperty("/almacenes", results);
+		},
+
+		onHandleAlmacen: function () {
+			if (!this._oAlmacenDialog) {
+				this._oAlmacenDialog = sap.ui.xmlfragment("Ventas.Vitrinav2.view.dialogs.valueHelpAlmacen", this);
+				this.getView().addDependent(this._oAlmacenDialog);
+			}
+			this._oAlmacenDialog.open();
+		},
+
+		onAlmacenDialogSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("value"),
+				oFilter = new Filter("LGORT", FilterOperator.Contains, sValue);
+			oEvent.getSource().getBinding("items").filter([oFilter]);
+		},
+
+		onAlmacenDialogClose: function (oEvent) {
+			var selected,
+				oSelectedItem = oEvent.getParameter("selectedItem");
+
+			oEvent.getSource().getBinding("items").filter([]);
+
+			if (!oSelectedItem) {
+				//this._oCentroDialog.destroy();
+				return;
+			}
+			selected = oSelectedItem.getTitle();
+			filterModel.getModel().setProperty("/almacen", selected);
+		},
+
 		getEspecies: async function () {
 			var filter = [
 				new Filter("ESPECIE", "Contains", "")
@@ -256,15 +422,15 @@ sap.ui.define([
 			} = await Services.getEspecies(filter);
 			oModel.setProperty("/especies", results);
 		},
-		
+
 		onHandleEspecie: function () {
 			if (!this._oEspecieDialog) {
-				this._oEspecieDialog = sap.ui.xmlfragment("ar.com.puntoventa.view.dialogs.valueHelpEspecie", this);
+				this._oEspecieDialog = sap.ui.xmlfragment("Ventas.Vitrinav2.view.dialogs.valueHelpEspecie", this);
 				this.getView().addDependent(this._oEspecieDialog);
 			}
 			this._oEspecieDialog.open();
 		},
-		
+
 		onEspecieDialogSearch: function (oEvent) {
 			var sValue = oEvent.getParameter("value"),
 				oFilter = new Filter("ESPECIE", FilterOperator.Contains, sValue);
@@ -288,7 +454,7 @@ sap.ui.define([
 		onValueHelpRequested: function () {
 			var aCols = columns.getModel().getData().cols;
 
-			this._oValueHelpDialogLote = sap.ui.xmlfragment("ar.com.puntoventa.view.dialogs.valueHelpLote", this);
+			this._oValueHelpDialogLote = sap.ui.xmlfragment("Ventas.Vitrinav2.view.dialogs.valueHelpLote", this);
 			this.getView().addDependent(this._oValueHelpDialogLote);
 
 			this._oValueHelpDialogLote.getTableAsync().then(function (oTable) {
@@ -331,16 +497,24 @@ sap.ui.define([
 			this._oValueHelpDialog.destroy();
 		},*/
 
-		callProductosService: async function () {
+		callProductosService: async function (selectedCode) {
+			var aFilter = [];
+			aFilter.push(new sap.ui.model.Filter("VTWEG", sap.ui.model.FilterOperator.EQ, selectedCode));
 			try {
 				var oTable = this.getView().byId("tablaProductos");
 				oTable.setBusy(true);
-				const aData = await this.readProductosService();
+				const aData = await this.readProductosService(aFilter);
 				if (aData.results.length > 0) {
-					oTable.setBusy(false);
-					this.getOwnerComponent().getModel("productos").setProperty("/items", aData.results);
+					aData.results.forEach((item, index) => {
+						aData.results[index].LABST = Number(item.LABST.trim())
+					});
+					aData.results.forEach((item, index) => {
+						aData.results[index].PRECIO = Number(item.PRECIO.trim())
+					});
 					//this._dialog.close();
 				}
+				this.getOwnerComponent().getModel("productos").setProperty("/items", aData.results);
+				oTable.setBusy(false);
 			} catch (err) {
 				oTable.setBusy(false);
 				if (err.responseText !== undefined) {
@@ -352,9 +526,57 @@ sap.ui.define([
 			}
 		},
 
-		readProductosService: function () {
+		callProductosServiceFiltering: async function () {
+			var oTable = this.getView().byId("tablaProductos");
+			try {
+				var url =
+					`/sap/opu/odata/sap/zod_pedido_srv/PEDIDOSet?$inlinecount=allpages`;
+				if (filterModel.getModel().getData().filters !== "") {
+					url += filterModel.getModel().getData().filters;
+				}
+
+				var response = await fetch(
+					url, {
+						method: 'GET',
+						headers: {
+							"x-csrf-token": "fetch",
+							"Accept": "application/json",
+							"Content-Type": "application/json; charset=utf-8"
+						}
+					}
+				);
+
+				oTable.setBusy(true);
+				var aData = await response.json();
+
+				var oTable = this.getView().byId("tablaProductos");
+
+				if (aData.d.results.length > 0) {
+					aData.d.results.forEach((item, index) => {
+						aData.d.results[index].LABST = Number(item.LABST.trim())
+					});
+					aData.d.results.forEach((item, index) => {
+						aData.d.results[index].PRECIO = Number(item.PRECIO.trim())
+					});
+					//this._dialog.close();
+				}
+				this.getOwnerComponent().getModel("productos").setProperty("/items", aData.d.results);
+				oTable.setBusy(false);
+			} catch (err) {
+				oTable.setBusy(false);
+				if (err.responseText !== undefined) {
+					let error = JSON.parse(err.responseText).error.message.value;
+					sap.m.MessageToast.show(error);
+				} else {
+					sap.m.MessageToast.show("Error");
+				}
+			}
+		},
+
+		readProductosService: function (aFilter) {
 			return new Promise((res, rej) => {
 				this.getOwnerComponent().getModel("pedidos").read("/PEDIDOSet", {
+					filters: aFilter,
 					success: res,
 					error: rej
 				});
@@ -437,6 +659,7 @@ sap.ui.define([
 			button.setBusy(true);
 
 			try {
+				
 				var modelUsedByItem = "productos";
 				var item = this._instantiateItem(event.getSource().getBindingContext(modelUsedByItem).getObject());
 
@@ -460,6 +683,7 @@ sap.ui.define([
 					);
 				}
 			} catch (e) {
+				debugger;
 				var title = this.getOwnerComponent().getModel("i18n").getProperty("mainCartFailedToAddtitle");
 				//pendiente, e.message debe ser modificado!
 				if (e != this.getOwnerComponent().getModel("i18n").getProperty("cancelledFromPromise")) {
@@ -591,7 +815,7 @@ sap.ui.define([
 		_refreshAProductStock: function (item, itemStock) {
 			const productos = this.getOwnerComponent().getModel("productos");
 
-			const index = productos.getData().d.results.findIndex(
+			const index = productos.getData().items.findIndex(
 				(existingItem) => {
 					return existingItem.MATNR === item.matnr &&
 						existingItem.LGORT === item.lgort &&
@@ -600,7 +824,7 @@ sap.ui.define([
 				}
 			);
 
-			productos.getData().d.results[index].LABST = itemStock;
+			productos.getData().items[index].LABST = itemStock;
 
 			productos.refresh(true);
 		},
@@ -652,6 +876,7 @@ sap.ui.define([
 
 		applyFilter: function (filtros) {
 			//this.reset();
+			var canalSeleccionado = filtrosCanal.getModel().getProperty("/canalSeleccionado");
 			const namesFromService = {
 				almacen: "LGORT",
 				calibre: "CALIBRE",
@@ -685,16 +910,21 @@ sap.ui.define([
 						` and substringof('${value}', ${namesFromService[key]})`;
 				}
 			}
+			if (filter === "&$filter=") {
+				filter = filter + `VTWEG eq '${canalSeleccionado}'`;
+			} else {
+				filter = filter + `and VTWEG eq '${canalSeleccionado}'`;
+			}
 
 			//const pagination = this.getOwnerComponent().getModel("pagination");
-			//pagination.getData().filters = filter;
+			filterModel.setProperty("/filters", filter);
 
-			this.fetchProductos();
+			this.callProductosServiceFiltering();
 		},
 
 		clearFilters: function () {
 			this.byId("filterCharg").setValue("");
-			this.byId("filterMatnr").setValue("");
+			this.byId("material").setValue("");
 			this.byId("filterEspecie").setValue("");
 			this.byId("filterCentro").setValue("");
 			this.byId("filterAlmacen").setValue("");
@@ -736,36 +966,33 @@ sap.ui.define([
 			this.getOwnerComponent().setModel(undefined, "productos");
 		},
 
-		async onSuggest(event) {
+		onSuggest: async function (oEvent) {
 
-			if (event.getParameters().suggestValue === "") {
+			if (oEvent.getParameters().suggestValue === "") {
 				return;
 			}
 
 			const namesFromService = {
-				filterAlmacen: "LGORT",
 				filterCalibre: "CALIBRE",
-				filterCentro: "WERKS",
 				filterEspecie: "ESPECIE",
-				filterMatnr: "MATNR",
 				filterVariedad: "VARIEDAD",
 				filterCharg: "CHARG",
 				filterClassification: "CLASIFICACION_F_V"
 			};
 
-			var searchFor = event.getParameter("suggestValue");
+			var searchFor = oEvent.getParameter("suggestValue");
 			var filtro = [];
 			if (searchFor) {
 				filtro.push(new sap.ui.model.Filter("text", sap.ui.model.FilterOperator.Contains, searchFor));
 			}
 
-			const input = event.getSource();
+			const input = oEvent.getSource();
 			const filterBy = namesFromService[input.getName()];
-			const lookFor = event.getParameters().suggestValue;
+			const lookFor = oEvent.getParameters().suggestValue;
 			const fromReaderConstant = "(10)";
-			if (filterBy === namesFromService.filterCharg && lookFor.indexOf(fromReaderConstant) > 0) {
+			/*if (filterBy === namesFromService.filterCharg && lookFor.indexOf(fromReaderConstant) > 0) {
 				return;
-			}
+			}*/
 			await this.fetchSuggestions(filterBy, lookFor);
 			input.setFilterSuggests(false);
 			input.getBinding("suggestionItems").filter(filtro);
@@ -810,8 +1037,8 @@ sap.ui.define([
 		},
 
 		onAfterRendering: function () {
+			this.onHandlePopUpCanal();
 			this.initCart();
-			//this.fetchProductos();
 		}
 	});
 });

@@ -15,7 +15,7 @@ sap.ui.define(
 	) {
 		"use strict";
 		return Controller.extend(
-			"ar.com.puntoventa.controller.cart", {
+			"Ventas.Vitrinav2.controller.cart", {
 				onInit: function () {
 					this._instantiateClient();
 					var rut = this.byId("rutCliente");

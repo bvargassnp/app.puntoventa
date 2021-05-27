@@ -1,4 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ar.com.puntoventa.controller.Client"
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Ventas.Vitrinav2.controller.Client"
 	xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml">
 	<Page showFooter="true" showHeader="false">
 		<VBox width="100%" fitContainer="false">
@@ -44,7 +44,7 @@
 	</Page>
 </mvc:View>
 <!--<mvc:View
-    controllerName="ar.com.puntoventa.controller.Client"
+    controllerName="Ventas.Vitrinav2.controller.Client"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
 	xmlns:l="sap.ui.layout"

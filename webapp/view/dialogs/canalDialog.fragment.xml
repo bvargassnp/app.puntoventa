@@ -1,0 +1,7 @@
+<mvc:View controllerName="sap.m.sample.Dialog.C" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<l:VerticalLayout class="sapUiContentPadding" width="100%">
+		<ComboBox items="{filtrosLote>/lote}">
+			<core:Item key="{key}" text="{text}"/>
+		</ComboBox>
+	</l:VerticalLayout>
+</mvc:View>

@@ -16,74 +16,80 @@ sap.ui.define(['jquery.sap.global'],
 					visible: true
 				},
 				{
-					id: "demoApp-tablaProductos-materialCol",
+					id: "demoApp-tablaProductos-materialNumberCol",
 					order: 1,
+					text: "Numero de material",
+					visible: true
+				},
+				{
+					id: "demoApp-tablaProductos-materialCol",
+					order: 2,
 					text: "Descripción de material",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-precioCol",
-					order: 2,
+					order: 3,
 					text: "Precio",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-centroCol",
-					order: 3,
+					order: 4,
 					text: "Centro",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-almacenCol",
-					order: 4,
+					order: 5,
 					text: "Almacén",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-stockCol",
-					order: 5,
+					order: 6,
 					text: "Stock disponible",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-loteCol",
-					order: 6,
+					order: 7,
 					text: "Lote",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-calibreCol",
-					order: 7,
+					order: 8,
 					text: "Calibre",
 					visible: false
 				},
 				{
 					id: "demoApp-tablaProductos-categoriaCol",
-					order: 8,
+					order: 9,
 					text: "Categoria",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-subvariedadCol",
-					order: 9,
+					order: 10,
 					text: "Subvariedad",
 					visible: false
 				},
 				{
 					id: "demoApp-tablaProductos-clasificacionCol",
-					order: 10,
+					order: 11,
 					text: "Clasificación",
 					visible: false
 				},
 				{
 					id: "demoApp-tablaProductos-origenCol",
-					order: 11,
+					order: 12,
 					text: "Origen",
 					visible: false
 				},
 				{
 					id: "demoApp-tablaProductos-marcaCol",
-					order: 12,
+					order: 13,
 					text: "Marca",
 					visible: false
 				}
@@ -100,74 +106,80 @@ sap.ui.define(['jquery.sap.global'],
 					visible: true
 				},
 				{
-					id: "demoApp-tablaProductos-materialCol",
+					id: "demoApp-tablaProductos-materialNumberCol",
 					order: 1,
+					text: "Numero de material",
+					visible: true
+				},
+				{
+					id: "demoApp-tablaProductos-materialCol",
+					order: 2,
 					text: "Descripción de material",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-precioCol",
-					order: 2,
+					order: 3,
 					text: "Precio",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-centroCol",
-					order: 3,
+					order: 4,
 					text: "Centro",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-almacenCol",
-					order: 4,
+					order: 5,
 					text: "Almacén",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-stockCol",
-					order: 5,
+					order: 6,
 					text: "Stock disponible",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-loteCol",
-					order: 6,
+					order: 7,
 					text: "Lote",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-calibreCol",
-					order: 7,
+					order: 8,
 					text: "Calibre",
 					visible: false
 				},
 				{
 					id: "demoApp-tablaProductos-categoriaCol",
-					order: 8,
+					order: 9,
 					text: "Categoria",
 					visible: true
 				},
 				{
 					id: "demoApp-tablaProductos-subvariedadCol",
-					order: 9,
+					order: 10,
 					text: "Subvariedad",
 					visible: false
 				},
 				{
 					id: "demoApp-tablaProductos-clasificacionCol",
-					order: 10,
+					order: 11,
 					text: "Clasificación",
 					visible: false
 				},
 				{
 					id: "demoApp-tablaProductos-origenCol",
-					order: 11,
+					order: 12,
 					text: "Origen",
 					visible: false
 				},
 				{
 					id: "demoApp-tablaProductos-marcaCol",
-					order: 12,
+					order: 13,
 					text: "Marca",
 					visible: false
 				}

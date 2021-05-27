@@ -5,7 +5,7 @@ sap.ui.getCore().attachInit(function () {
 	"use strict";
 
 	sap.ui.require([
-		"ar/com/puntoventa/test/integration/AllJourneys"
+		"Ventas/Vitrinav2/test/integration/AllJourneys"
 	], function () {
 		QUnit.start();
 	});

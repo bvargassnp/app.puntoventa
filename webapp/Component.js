@@ -1,12 +1,12 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"ar/com/puntoventa/model/models",
-	"ar/com/puntoventa/utils/FioriComponent"
+	"Ventas/Vitrinav2/model/models",
+	"Ventas/Vitrinav2/utils/FioriComponent"
 ], function (UIComponent, Device, models, FioriComponent) {
 	"use strict";
 
-	return UIComponent.extend("ar.com.puntoventa.Component", {
+	return UIComponent.extend("Ventas.Vitrinav2.Component", {
 
 		metadata: {
 			manifest: "json"

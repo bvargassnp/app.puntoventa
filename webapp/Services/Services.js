@@ -1,5 +1,5 @@
 sap.ui.define([
-"ar/com/puntoventa/utils/Constants"
+	"Ventas/Vitrinav2/utils/Constants"
 ], function (Constants) {
 	"use strict";
 	return {
@@ -28,8 +28,20 @@ sap.ui.define([
 			const oDataModel = this.getOdataModel(Constants.endPoint.BACKEND);
 			return new Promise((res, rej) => {
 				oDataModel.read(sEntity, {
-					urlParameters: {"$select": select},
+					urlParameters: {
+						"$select": select
+					},
 					filters: aFilter,
+					success: res,
+					error: rej
+				});
+			});
+		},
+		
+		callGetServiceToEntity: function (sEntity) {
+			const oDataModel = this.getOdataModel(Constants.endPoint.BACKEND);
+			return new Promise((res, rej) => {
+				oDataModel.read(sEntity, {
 					success: res,
 					error: rej
 				});
@@ -54,31 +66,30 @@ sap.ui.define([
 		getEquipos: function () {
 			return this.callGetService(Constants.entity.EQUIPO);
 		},
-
+		//LOTE
 		getLotes: function (filter) {
-			return this.callGetService(Constants.entity.PEDIDOS,"CHARG", filter);
+			return this.callGetService(Constants.entity.PEDIDOS, "CHARG", filter);
+		},
+		//MATERIAL
+		getMateriales: function (filter) {
+			return this.callGetServiceToEntity(Constants.entity.MATERIALES);
 		},
 
-		getMateriales: function (filter) {
-			return this.callGetService(Constants.entity.PEDIDOS, "MATNR", filter);
-		},
-		
 		getEspecies: function (filter) {
 			return this.callGetService(Constants.entity.PEDIDOS, "ESPECIE", filter);
 		},
-		
-		getSolicitudesSalida: function (aFilter) {
-			return this.callGetService(Constants.entity.SOLICITUD, aFilter);
+		//CENTRO
+		getCentros: function (filter) {
+			return this.callGetServiceToEntity(Constants.entity.CENTROS);
 		},
-		
-		getSolicitudesEntrada: function (aFilter) {
-			return this.callGetService(Constants.entity.SOLICITUD, aFilter);
+		//ALMACEN
+		getAlmacenes: function (filter) {
+			return this.callGetServiceToEntity(Constants.entity.ALMACENES);
 		},
-		
-		getFilesInput: function (nRsnum) {
-			const endPoint = `${Constants.entity.SOLICITUD}('${nRsnum}')/NavSolicitudArchivo`;
-			return this.callGetService(endPoint);
-		}
+		//LOTE
+		getCanales: function (filter) {
+			return this.callGetServiceToEntity(Constants.entity.CANALES);
+		},
 
 	};
 });

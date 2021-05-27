@@ -14,4 +14,9 @@ AppVariant_index.html
 AppVariantPreviewPayload.zip
 mergedManifestDescriptor.json
 APIExternalProducer.js
+<<<<<<< HEAD
 .*/APIExternalProducer.js
+=======
+.*/APIExternalProducer.js
+/dist/
+>>>>>>> modificacionF4

@@ -6,7 +6,7 @@
 		confirm=".onMaterialDialogClose"
 		cancel=".onMaterialDialogClose" >
 			<StandardListItem
-			  info="{filtrosMaterial>MATNR}"
-			  title="{filtrosMaterial>MATNR}" />
+			  title="{filtrosMaterial>MATNR}"
+			  description="{filtrosMaterial>MAKTX}" />
 	</SelectDialog>
 </core:FragmentDefinition>	

@@ -1,6 +1,6 @@
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
-	"ar/com/puntoventa/utils/FioriComponent"
+	"Ventas/Vitrinav2/utils/FioriComponent"
 ], function (JSONModel, FioriComponent) {
 	"use strict";
 

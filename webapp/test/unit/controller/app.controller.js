@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"ar/com/puntoventa/controller/app.controller"
+	"Ventas/Vitrinav2/controller/app.controller"
 ], function (Controller) {
 	"use strict";
 

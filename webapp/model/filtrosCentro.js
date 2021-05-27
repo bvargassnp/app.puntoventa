@@ -9,12 +9,12 @@ sap.ui.define([
 			//gets component
 			var component = FioriComponent.getComponent();
 			//gets model
-			var jsonModel = component.byId("app").getModel("columns");
+			var jsonModel = component.byId("app").getModel("filtrosCentro");
 			//checks if the model exists
 			if (!jsonModel) {
 				jsonModel = new JSONModel();
 				jsonModel.setSizeLimit(9999);
-				component.byId("app").setModel(jsonModel, "columns");
+				component.byId("app").setModel(jsonModel, "filtrosCentro");
 			}
 			return jsonModel;
 		},
@@ -22,17 +22,7 @@ sap.ui.define([
 		initializeModel: function () {
 			var jsonModel = this.getModel();
 			jsonModel.setData({
-				"cols": [{
-					"label": "Lote",
-					"template": "CHARG",
-					"width": "5rem"
-				}, {
-					"label": "Descripción",
-					"template": "CHARG"
-				}, {
-					"label": "Categoria",
-					"template": "Category"
-				}]
+				centros: []
 			});
 			return jsonModel;
 		},

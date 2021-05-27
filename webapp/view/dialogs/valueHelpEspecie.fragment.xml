@@ -6,7 +6,6 @@
 		confirm=".onEspecieDialogClose"
 		cancel=".onEspecieDialogClose" >
 			<StandardListItem
-			  info="{filtrosEspecie>ESPECIE}"
-			  title="{filtrosEspecie>ESPECIE}" />
+			 title="{filtrosEspecie>ESPECIE}" />
 	</SelectDialog>
 </core:FragmentDefinition>	

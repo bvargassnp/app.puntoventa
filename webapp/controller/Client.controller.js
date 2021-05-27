@@ -4,11 +4,11 @@ sap.ui.define(
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/routing/History",
 		"sap/m/MessageBox",
-		"ar/com/puntoventa/model/cliente"
+		"Ventas/Vitrinav2/model/cliente"
 	],
 	function (Controller, JSONModel, History, MessageBox) {
 		"use strict";
-		return Controller.extend("ar.com.puntoventa.controller.Client", {
+		return Controller.extend("Ventas.Vitrinav2.controller.Client", {
 				onInit: function () {
 					/*var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 					oRouter
