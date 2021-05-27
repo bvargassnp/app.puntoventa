@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="Almacenes"
+		items="{filtrosAlmacen>/almacenes}"
+		liveChange=".onAlmacenDialogSearch"
+		confirm=".onAlmacenDialogClose"
+		cancel=".onAlmacenDialogClose" >
+			<StandardListItem
+			  title="{filtrosAlmacen>LGORT}"
+			  description="{filtrosAlmacen>LGOBE}" />
+	</SelectDialog>
+</core:FragmentDefinition>	

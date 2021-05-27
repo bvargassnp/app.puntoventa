@@ -1,0 +1,9 @@
+<mvc:View controllerName="Ventas.Vitrinav2.controller.app" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<mvc:XMLView viewName="Ventas.Vitrinav2.view.Main"></mvc:XMLView>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

@@ -1,0 +1,193 @@
+<mvc:View controllerName="ar.com.puntoventa.controller.Main" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:u="sap.ui.unified">
+	<Page title="{i18n>mainTitle}" showNavButton="true">
+		<content>
+			<fb:FilterBar search="onFilter" filtersDialogSearch="onFilter" showRestoreButton="false" showClearButton="true" showClearOnFB="true"
+				clear="clearFilters">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="mainfilter" name="lote" label="{i18n>batch}" labelTooltip="CHARG" partOfCurrentVariant="true"
+						visibleInFilterBar="true">
+						<fb:control>
+							<MultiInput id="loteInput" placeholder="Ingrese lote.." valueHelpOnly="true" valueHelpRequest=".onValueHelpRequested"></MultiInput>
+							<!--<Input id="filterCharg" name="filterCharg" type="Text" submit="onFilter" showSuggestion="true" suggestionItems="{suggestionsCHARG>/}"
+								suggest="onSuggest">
+								<suggestionItems>
+									<core:Item key="text" text="{suggestionsCHARG>text}"/>
+								</suggestionItems>
+							</Input>-->
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="mainfilter" name="numeroMaterial.." label="{i18n>materialNumber}" labelTooltip="MATNR"
+						partOfCurrentVariant="true" visibleInFilterBar="true">
+						<fb:control>
+							<Input id="material" placeholder="Indique Material.." valueHelpOnly="true" showValueHelp="true" busy="{EquipoMatchcode>/Busy}"
+								value="{filterModel>/material}" valueHelpRequest="onHandleMaterial"></Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="mainfilter" name="especie" label="{i18n>species}" labelTooltip="{i18n>species}" partOfCurrentVariant="true"
+						visibleInFilterBar="true">
+						<fb:control>
+							<Input id="filterEspecie" placeholder="Indique especie.." valueHelpOnly="true" showValueHelp="true" busy="{EquipoMatchcode>/Busy}"
+								value="{filterModel>/especie}" valueHelpRequest="onHandleEspecie"></Input>
+							<!--<Input id="filterEspecie" name="filterEspecie" type="Text" submit="onFilter" showSuggestion="true" suggestionItems="{suggestionsESPECIE>/}"
+								suggest="onSuggest">
+								<suggestionItems>
+									<core:Item key="text" text="{suggestionsESPECIE>text}"/>
+								</suggestionItems>
+							</Input>-->
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="mainfilter" name="centroLogistico" label="{i18n>center}" labelTooltip="WERKS" partOfCurrentVariant="true"
+						visibleInFilterBar="true">
+						<fb:control>
+							<Input id="filterCentro" name="filterCentro" type="Text" submit="onFilter" showSuggestion="true" suggestionItems="{suggestionsWERKS>/}"
+								suggest="onSuggest">
+								<suggestionItems>
+									<core:Item key="text" text="{suggestionsWERKS>text}"/>
+								</suggestionItems>
+							</Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="mainfilter" name="almacen" label="{i18n>warehouse}" labelTooltip="LGORT" partOfCurrentVariant="true"
+						visibleInFilterBar="true">
+						<fb:control>
+							<Input id="filterAlmacen" name="filterAlmacen" type="Text" submit="onFilter" showSuggestion="true" suggestionItems="{suggestionsLGORT>/}"
+								suggest="onSuggest">
+								<suggestionItems>
+									<core:Item key="text" text="{suggestionsLGORT>text}"/>
+								</suggestionItems>
+							</Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="mainfilter" name="variedad" label="{i18n>variety}" labelTooltip="{i18n>variety}" partOfCurrentVariant="true"
+						visibleInFilterBar="true">
+						<fb:control>
+							<Input id="filterVariedad" name="filterVariedad" type="Text" submit="onFilter" showSuggestion="true"
+								suggestionItems="{suggestionsVARIEDAD>/}" suggest="onSuggest">
+								<suggestionItems>
+									<core:Item key="text" text="{suggestionsVARIEDAD>text}"/>
+								</suggestionItems>
+							</Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="mainfilter" name="calibre" label="{i18n>caliber}" labelTooltip="{i18n>caliber}" partOfCurrentVariant="true"
+						visibleInFilterBar="true">
+						<fb:control>
+							<Input id="filterCalibre" name="filterCalibre" type="Text" submit="onFilter" showSuggestion="true" suggestionItems="{suggestionsCALIBRE>/}"
+								suggest="onSuggest">
+								<suggestionItems>
+									<core:Item key="text" text="{suggestionsCALIBRE>text}"/>
+								</suggestionItems>
+							</Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="mainfilter" name="classification" label="{i18n>classification}" labelTooltip="{i18n>classification}"
+						partOfCurrentVariant="true" visibleInFilterBar="true">
+						<fb:control>
+							<Input id="filterClassification" name="filterClassification" type="Text" submit="onFilter" showSuggestion="true"
+								suggestionItems="{suggestionsCLASIFICACION_F_V>/}" suggest="onSuggest">
+								<suggestionItems>
+									<core:Item key="text" text="{suggestionsCLASIFICACION_F_V>text}"/>
+								</suggestionItems>
+							</Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+				<ScrollContainer
+				id="myScrollContainer"
+				height="70vh"
+				class="sapUiNoContentPadding"
+				vertical="true"
+				horizontal="false">
+				<Table id="tablaProductos" sticky="HeaderToolbar,ColumnHeaders" items="{productos>/items}" inset="false" growing="true" growingThreshold="20"
+					growingScrollToLoad="true">
+					<headerToolbar>
+							<Toolbar>
+								<Title text="Productos"/>
+								<ToolbarSpacer/>
+								
+								<SearchField id="asistenteSearchfield" width="40%" placeholder="Buscar por descripción de material" liveChange=".onSearchMaterial" class="sapUiSmallMargin"/>
+								<!-- Add the Personalization button -->
+								<Button press="navToCart" icon="sap-icon://cart" type="Emphasized" width="4vw"></Button>
+								<Button icon="sap-icon://action-settings" press="onPersoButtonPressed">
+									<layoutData>
+										<OverflowToolbarLayoutData priority="NeverOverflow"/>
+									</layoutData>
+								</Button>
+								<Button tooltip="View Settings" icon="sap-icon://drop-down-list" press="handleViewSettingsDialogButtonPressed"/>
+								<Button icon="sap-icon://excel-attachment" type="Default" press="onDataExport"/>
+							</Toolbar>
+						</headerToolbar>
+						<infoToolbar>
+							<Toolbar id="vsdFilterBar" visible="false">
+								<Text id="vsdFilterLabel"/>
+							</Toolbar>
+						</infoToolbar>
+					<columns>
+						<Column id="botonCol">
+							<Text text="{i18n>add}"/>
+						</Column>
+						<Column id="materialCol" width="20em" hAlign="Center" minScreenWidth="Desktop" demandPopin="true" importance="Low">
+							<Text text="{i18n>materialDescription}"/>
+						</Column>
+						<Column id="precioCol" hAlign="Center" minScreenWidth="Desktop" demandPopin="true" importance="Low">
+							<Text text="{i18n>price}"/>
+						</Column>
+						<Column id="centroCol" hAlign="Center" minScreenWidth="Desktop" demandPopin="true" importance="Medium">
+							<Text text="{i18n>center}"/>
+						</Column>
+						<Column id="almacenCol" hAlign="Center" minScreenWidth="Tablet" demandPopin="true" importance="High">
+							<Text text="{i18n>warehouse}"/>
+						</Column>
+						<Column id="stockCol" hAlign="Center" minScreenWidth="Phone" demandPopin="true" importance="High">
+							<Text text="{i18n>stock}"/>
+						</Column>
+						<Column id="loteCol" hAlign="Center" minScreenWidth="Tablet" demandPopin="true" importance="Low">
+							<Text text="{i18n>batch}"/>
+						</Column>
+						<Column id="calibreCol" hAlign="Center" minScreenWidth="Desktop" demandPopin="true" importance="Low">
+							<Text text="{i18n>caliber}"/>
+						</Column>
+						<Column id="categoriaCol" hAlign="Center" minScreenWidth="Desktop" demandPopin="true" importance="Low">
+							<Text text="{i18n>category}"/>
+						</Column>
+						<Column id="subvariedadCol" hAlign="Center" minScreenWidth="Phone" demandPopin="false" importance="Medium">
+							<Text text="{i18n>subvariety}"/>
+						</Column>
+						<Column id="clasificacionCol" hAlign="Center" minScreenWidth="Phone" demandPopin="false" importance="Medium">
+							<Text text="{i18n>classification}"/>
+						</Column>
+						<Column id="origenCol" hAlign="Center" minScreenWidth="Tablet" demandPopin="true" importance="Medium">
+							<Text text="{i18n>origin}"/>
+						</Column>
+						<Column id="marcaCol" hAlign="Center" minScreenWidth="Phone" demandPopin="false" importance="High">
+							<Text text="{i18n>brand}"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Button icon="sap-icon://cart-3" press="addToCart"/>
+								<Text text="{productos>MAKTX}"/>
+								<Text text="{productos>PRECIO}"/>
+								<!--<u:Currency value="{productos>PRECIO}" currency="{productos>MONEDA}" useSymbol="false"/>-->
+								<Text text="{productos>WERKS}"/>
+								<Text text="{productos>LGORT}"/>
+								<ObjectNumber number="{ parts:[{path:'productos>LABST'},{path:'productos>MEINS'}], formatOptions: {showMeasure: true} }"
+									unit="{productos>/MEINS}"/>
+								<Text text="{productos>CHARG}"/>
+								<Text text="{productos>CALIBRE}"/>
+								<Text text="{productos>CATEGORIA}"/>
+								<Text text="{productos>SUBVARIEDAD}"/>
+								<Text text="{productos>CLASIFICACION_F_V}"/>
+								<Text text="{productos>ORIGEN}"/>
+								<Text text="{productos>MARCA}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</ScrollContainer>
+		</content>
+	</Page>
+</mvc:View>

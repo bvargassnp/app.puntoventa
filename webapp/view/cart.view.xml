@@ -1,0 +1,288 @@
+<mvc:View
+    controllerName="ar.com.puntoventa.controller.cart"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core"
+	xmlns:u="sap.ui.unified">
+	<Page 
+		title="{i18n>cartTittle}"
+		showNavButton="true"
+		navButtonPress="onNavBack">
+	
+		<content>
+			<FlexBox 
+				justifyContent="SpaceAround" 
+				alignItems="Center">
+				<items>
+					<HBox width="25vh" alignItems="Center">
+						<Label 
+							text="{i18n>cartFiscalIdentifier}" 
+							labelFor="rutCliente"
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="10vw"/>
+						<Input 
+							id="rutCliente" 
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="7vw"/>
+						<Button
+							id="searchClient"
+							type="Emphasized"
+							icon="sap-icon://search"
+							class="sapUiNoMarginBegin sapUiSmallMarginBottom"
+							press="fetchClient">
+						</Button>
+					</HBox>
+
+					<HBox width="25vh" alignItems="Center">
+						<Label 
+							text="{i18n>cartName}"
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="10vw"/>
+						<Text 
+							id="nombre" 
+							text="{cliente>/name1}"
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="7vw"/>
+						<Button
+							id="searchClientList"
+							type="Emphasized"
+							icon="sap-icon://search"
+							class="sapUiNoMarginBegin sapUiSmallMarginBottom"
+							press="clientSelectDialog">
+						</Button>
+					</HBox>
+
+					<HBox width="25vh" alignItems="Center">
+						<Label 
+							text="{i18n>cartClientId}"
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="10vw"/>
+						<Text 
+							id="idSap" 
+							text="{cliente>/id}"
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom" 
+							width="10vw"/>
+					</HBox>
+					
+				</items>
+			</FlexBox>
+
+			<FlexBox 
+				justifyContent="SpaceAround" 
+				alignItems="Center">
+				<items>
+					<HBox width="25vh" alignItems="Center">
+						<Label 
+							text="{i18n>cartAddress}" 
+							labelFor="direccion" 
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="10vw"/>
+						<Text 
+							id="direccion"
+							text="{cliente>/street}"
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="10vw"/>
+					</HBox>
+
+					<HBox width="25vh" alignItems="Center">
+						<Label 
+							text="{i18n>cartPaymentCondition}" 
+							labelFor="condicionPago" 
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="10vw"/>
+						<Text 
+							id="condicionPago"
+							text="{cliente>/paymentCondition}"
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="10vw"/>
+					</HBox>
+					<HBox width="25vh" alignItems="Center">
+					</HBox>
+				</items>
+			</FlexBox>
+
+			<FlexBox 
+				justifyContent="SpaceAround" 
+				alignItems="Center">
+				<items>
+					<HBox width="25vh" alignItems="Center">
+						<Label 
+							text="{i18n>invoiceTypeLabel}" 
+							labelFor="invoiceType" 
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="10vw"/>
+						<ComboBox
+							id="invoiceType"
+							items="{path: 'invoiceType>/'}"
+							selectedKey="default"
+							width="10vw"
+							selectionChange="onInvoiceChange">
+							<core:Item key="{invoiceType>type}" text="{invoiceType>description}" />
+						</ComboBox>
+					</HBox>
+
+					<HBox width="25vh" alignItems="Center">
+						<Label 
+							text="{i18n>deliveryTypeLabel}" 
+							labelFor="deliveryType" 
+							class="sapUiSmallMarginEnd sapUiSmallMarginBottom"
+							width="10vw"/>
+						<ComboBox
+							id="deliveryType"
+							items="{path: 'deliveryOptions>/'}"
+							selectedKey="default"
+							width="10vw"
+							selectionChange="onDeliveryChange">
+							<core:Item key="{deliveryOptions>type}" text="{deliveryOptions>description}" />
+						</ComboBox>
+					</HBox>
+
+					<HBox width="25vh" alignItems="Center">
+						<Button
+							id="mutateClient"
+							type="Ghost"
+							press="navToClient"
+							text="{i18n>cartSporadicClientButton}">
+						</Button>
+					</HBox>
+					
+				</items>
+			</FlexBox>
+			
+			<Panel 
+				headerText="Productos"
+				height="48vh"
+				class="sapUiNoContentPadding">
+				<Table 
+					id="tablaProductos"
+					items="{path: 'cart>/items'}"
+					sticky="ColumnHeaders">
+					<columns>
+						<Column width="12em">
+							<Text text="{i18n>delete}" />
+						</Column>
+						<Column >
+							<Text text="{i18n>materialNumber}" />
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+							<Text text="{i18n>materialDescription}" />
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+							<Text text="{i18n>brand}" />
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+							<Text text="{i18n>center}" />
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+							<Text text="{i18n>batch}" />
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+							<Text text="{i18n>caliber}" />
+						</Column>
+						<Column>
+							<Text text="{i18n>stock}"/>
+						</Column>
+						<Column width="12vw">
+							<Text text="{i18n>quantity}" />
+						</Column>
+						<Column>
+							<Text text="{i18n>priceDiferential}" />
+						</Column>
+						<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+							<Text text="{i18n>price}" />
+						</Column>
+						<Column>
+							<Text text="{i18n>total}" />
+						</Column>
+					</columns>
+
+					<items>
+						<ColumnListItem>
+						
+							<cells>
+								<Button icon="sap-icon://cart-2" type="Reject" press="removeFromCart"/>
+								<Text text="{cart>matnr}" />
+								<Text text="{cart>description}" />
+								<Text text="{cart>marca}"/>
+								<Text text="{cart>werks}" />
+								<Text text="{cart>charg}" />
+								<Text text="{cart>calibre}" />
+								<ObjectNumber
+									number="{
+										parts:[{path:'cart>_maxQuantity'},{path:'cart>quantityUnit'}],
+										formatOptions: {showMeasure: true}
+									}"
+									unit="{cart>/quantityUnit}" />
+								<StepInput
+									value="{cart>quantity}"
+									step="1"
+									largerStep="5"
+									min="1"
+									max="{cart>_maxQuantity}"
+									change="quantityChange"
+									name="quantity"
+									textAlign="Center"
+									validationMode="LiveChange"
+									width="80%"/>
+								<CustomListItem>
+									<HBox displayInline="true" justifyContent="Center" fitContainer="true" width="100%" alignItems="Center">
+										<Button 
+											type="Ghost"
+											press="onDiscountOperatorChange"
+											icon="sap-icon://less">
+											
+										</Button>
+										<Input
+											class="sapUiNoMarginBegin" 
+											value="{cart>discount}"
+											type="Number"
+											liveChange="onDiscountTextChange"
+											name="discount"/>
+									</HBox>
+								</CustomListItem>
+								<u:Currency value="{cart>displayPrice}" currency="{cart>currency}" useSymbol="false"/>
+								<u:Currency value="{cart>total}" currency="{cart>currency}" useSymbol="false"/>
+							</cells>
+
+						</ColumnListItem>
+
+					</items>
+
+				</Table>
+			</Panel>
+
+			<List>
+				<InputListItem label="{i18n>boxCount}">
+					<Text id="boxCounter" text="{cart>/boxCount}"/>
+				</InputListItem>
+				<InputListItem label="{i18n>netPurchase}">
+					<u:Currency id="netPurchase" value="{cart>/netTotal}" currency="USD" useSymbol="false"/>
+				</InputListItem>
+				<InputListItem label="{i18n>tax}">
+					<u:Currency id="tax" value="{cart>/tax}" currency="USD" useSymbol="false"/>
+				</InputListItem>
+				<InputListItem label="{i18n>perceptionTaxLabel}">
+					<u:Currency id="perceptionTax" value="{cart>/visiblePerceptionTaxValue}" currency="USD" useSymbol="false"/>
+				</InputListItem>
+				<InputListItem label="{i18n>totalPurchase}">
+					<u:Currency id="totalPurchase" value="{cart>/total}" currency="USD" useSymbol="false"/>
+				</InputListItem>
+			</List>
+
+		</content>
+
+		<footer>
+			<OverflowToolbar>
+				<ToolbarSpacer/>
+				<Button 
+					type="Emphasized"
+					press="promptSendConfirmation"
+					text="{i18n>cartPurchaseButton}">
+				</Button>
+			</OverflowToolbar>
+		</footer>
+	</Page>
+</mvc:View>

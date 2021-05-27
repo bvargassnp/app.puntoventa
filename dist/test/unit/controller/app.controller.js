@@ -1,0 +1,1 @@
+sap.ui.define(["Ventas/Vitrinav2/controller/app.controller"],function(t){"use strict";QUnit.module("app Controller");QUnit.test("I should test the app controller",function(n){var o=new t;o.onInit();n.ok(o)})});

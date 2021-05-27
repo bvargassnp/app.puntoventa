@@ -1,0 +1,233 @@
+{
+    "resources": [
+        {
+            "name": "../../../Ventas/Vitrinav2/utils/ExcelDownloaderHelper.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/i18n/i18n_es.properties",
+            "raw": "i18n/i18n.properties",
+            "locale": "_es"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/i18n/i18n.properties",
+            "raw": "i18n/i18n.properties"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/manifest.json"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/utils/FioriComponent.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/i18n/i18n_en.properties",
+            "raw": "i18n/i18n.properties",
+            "locale": "_en"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/utils/Constants.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/models.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/layoutModel.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosMaterial.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosLote.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosEspecie.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosCentro.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosCanal.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosAlmacen.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filterModel.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/columns.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/cliente.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/cart.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/DemoPersoService.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/controller/cart.controller.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/controller/app.controller.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/controller/Main.controller.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/controller/Client.controller.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/Services/Services.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/Component.js"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/manifest-bundle.zip"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/Component-preload.js",
+            "merged": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/utils/FioriComponent-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/utils/ExcelDownloaderHelper-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/utils/Constants-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/models-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/layoutModel-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosMaterial-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosLote-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosEspecie-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosCentro-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosCanal-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filtrosAlmacen-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/filterModel-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/columns-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/cliente-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/cart-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/model/DemoPersoService-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/controller/cart-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/controller/app-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/controller/Main-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/controller/Client-dbg.controller.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/Services/Services-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/Component-dbg.js",
+            "isDebug": true
+        },
+        {
+            "name": "../../../sap-ui-version.json"
+        },
+        {
+            "name": "neo-app.json"
+        },
+        {
+            "name": "di.code-validation.core_issues.json"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/dialogs/valueHelpMaterial.fragment.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/dialogs/valueHelpLote.fragment.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/dialogs/valueHelpEspecie.fragment.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/dialogs/valueHelpCentro.fragment.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/dialogs/valueHelpAlmacen.fragment.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/dialogs/canalDialog.fragment.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/dialogs/TableDialog.fragment.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/cart.view.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/app.view.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/Main.view.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/view/Client.view.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/localService/metadata.xml"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/css/style.css"
+        },
+        {
+            "name": "../../../Ventas/Vitrinav2/index.html"
+        }
+    ]
+}

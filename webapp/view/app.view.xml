@@ -1,0 +1,9 @@
+<mvc:View controllerName="ar.com.puntoventa.controller.app" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<mvc:XMLView viewName="ar.com.puntoventa.view.Main"></mvc:XMLView>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

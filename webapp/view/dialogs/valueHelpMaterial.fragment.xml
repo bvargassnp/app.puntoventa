@@ -1,0 +1,12 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<SelectDialog
+		title="Materiales"
+		items="{filtrosMaterial>/materiales}"
+		liveChange=".onMaterialDialogSearch"
+		confirm=".onMaterialDialogClose"
+		cancel=".onMaterialDialogClose" >
+			<StandardListItem
+			  info="{filtrosMaterial>MATNR}"
+			  title="{filtrosMaterial>MATNR}" />
+	</SelectDialog>
+</core:FragmentDefinition>	

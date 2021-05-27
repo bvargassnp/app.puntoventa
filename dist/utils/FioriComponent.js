@@ -1,0 +1,1 @@
+sap.ui.define([],function(){"use strict";return{_component:null,getComponent:function(){return this._component},setComponent:function(n){this._component=n}}});
