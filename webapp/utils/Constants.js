@@ -7,7 +7,10 @@ sap.ui.define([
 		},
 		entity: {
 			PEDIDOS: "/PEDIDOSet",
-			ALMACENES: "/MCODE_ALMACENSet"
+			ALMACENES: "/MCODE_ALMACENSet",
+			CANALES:"/MCODE_CANALSet",
+			CENTROS: "/MCODE_CENTROSet",
+			MATERIALES: "/MCODE_MATERIALESSet"
 		},
 		language: {
 			ES: "ES",

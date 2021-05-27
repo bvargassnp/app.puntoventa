@@ -37,6 +37,16 @@ sap.ui.define([
 				});
 			});
 		},
+		
+		callGetServiceToEntity: function (sEntity) {
+			const oDataModel = this.getOdataModel(Constants.endPoint.BACKEND);
+			return new Promise((res, rej) => {
+				oDataModel.read(sEntity, {
+					success: res,
+					error: rej
+				});
+			});
+		},
 
 		callPostService: function (sEntity, oPayload) {
 			//busy
@@ -62,7 +72,7 @@ sap.ui.define([
 		},
 		//MATERIAL
 		getMateriales: function (filter) {
-			return this.callGetService(Constants.entity.PEDIDOS, "MATNR,MAKTX", filter);
+			return this.callGetServiceToEntity(Constants.entity.MATERIALES);
 		},
 
 		getEspecies: function (filter) {
@@ -70,25 +80,18 @@ sap.ui.define([
 		},
 		//CENTRO
 		getCentros: function (filter) {
-			return this.callGetService(Constants.entity.PEDIDOS, "WERKS,NAME1", filter);
+			return this.callGetServiceToEntity(Constants.entity.CENTROS);
 		},
 		//ALMACEN
 		getAlmacenes: function (filter) {
-			return this.callGetService(Constants.entity.PEDIDOS, "LGORT,LGOBE", filter);
+			return this.callGetServiceToEntity(Constants.entity.ALMACENES);
+		},
+		//LOTE
+		getCanales: function (filter) {
+			return this.callGetServiceToEntity(Constants.entity.CANALES);
 		},
 
-		getSolicitudesSalida: function (aFilter) {
-			return this.callGetService(Constants.entity.SOLICITUD, aFilter);
-		},
 
-		getSolicitudesEntrada: function (aFilter) {
-			return this.callGetService(Constants.entity.SOLICITUD, aFilter);
-		},
-
-		getFilesInput: function (nRsnum) {
-			const endPoint = `${Constants.entity.SOLICITUD}('${nRsnum}')/NavSolicitudArchivo`;
-			return this.callGetService(endPoint);
-		}
 
 	};
 });

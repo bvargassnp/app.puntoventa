@@ -8,18 +8,15 @@
 					<fb:FilterGroupItem groupName="mainfilter" name="lote" label="{i18n>batch}" labelTooltip="CHARG" partOfCurrentVariant="true"
 						visibleInFilterBar="true">
 						<fb:control>
-							<!--<MultiInput id="loteInput" placeholder="Ingrese lote.." valueHelpOnly="true" valueHelpRequest=".onValueHelpRequested"></MultiInput>-->
-							<!--<Input id="filterCharg" name="filterCharg" type="Text" submit="onFilter" showSuggestion="true" suggestionItems="{suggestionsCHARG>/}"
-								suggest="onSuggest">
+							<Input id="filterCharg" placeholder="Indique lote.." name="filterCharg" type="Text" showSuggestion="true" suggestionItems="{suggestionsCHARG>/}"
+								suggest="onSuggest" value="{filterModel>/lote}">
 								<suggestionItems>
 									<core:Item key="text" text="{suggestionsCHARG>text}"/>
 								</suggestionItems>
-							</Input>-->
-							<Input id="loteInput" placeholder="Indique lote.." valueHelpOnly="true" showValueHelp="true" busy="{EquipoMatchcode>/Busy}"
-								value="{filterModel>/filterCharg}" valueHelpRequest="onHandleLote"></Input>
+							</Input>
 						</fb:control>
 					</fb:FilterGroupItem>
-					<fb:FilterGroupItem groupName="mainfilter" name="numeroMaterial.." label="{i18n>materialNumber}" labelTooltip="MATNR"
+					<fb:FilterGroupItem groupName="mainfilter" name="numeroMaterial" label="{i18n>materialNumber}" labelTooltip="MATNR"
 						partOfCurrentVariant="true" visibleInFilterBar="true">
 						<fb:control>
 							<Input id="material" placeholder="Indique Material.." valueHelpOnly="true" showValueHelp="true" busy="{EquipoMatchcode>/Busy}"
@@ -29,8 +26,12 @@
 					<fb:FilterGroupItem groupName="mainfilter" name="especie" label="{i18n>species}" labelTooltip="{i18n>species}" partOfCurrentVariant="true"
 						visibleInFilterBar="true">
 						<fb:control>
-							<Input id="filterEspecie" placeholder="Indique especie.." valueHelpOnly="true" showValueHelp="true" busy="{EquipoMatchcode>/Busy}"
-								value="{filterModel>/especie}" valueHelpRequest="onHandleEspecie"></Input>
+							<Input id="filterEspecie" placeholder="Indique especie.." name="filterEspecie" type="Text" submit="onFilter" showSuggestion="true" suggestionItems="{suggestionsESPECIE>/}"
+								suggest="onSuggest" value="{filterModel>/especie}">
+								<suggestionItems>
+									<core:Item key="text" text="{suggestionsESPECIE>text}"/>
+								</suggestionItems>
+							</Input>
 						</fb:control>
 					</fb:FilterGroupItem>
 					<fb:FilterGroupItem groupName="mainfilter" name="centroLogistico" label="{i18n>center}" labelTooltip="WERKS" partOfCurrentVariant="true"
@@ -54,8 +55,8 @@
 					<fb:FilterGroupItem groupName="mainfilter" name="variedad" label="{i18n>variety}" labelTooltip="{i18n>variety}" partOfCurrentVariant="true"
 						visibleInFilterBar="true">
 						<fb:control>
-							<Input id="filterVariedad" name="filterVariedad" type="Text" submit="onFilter" showSuggestion="true"
-								suggestionItems="{suggestionsVARIEDAD>/}" suggest="onSuggest">
+							<Input id="filterVariedad" placeholder="Indique variedad.." name="filterVariedad" type="Text" submit="onFilter" showSuggestion="true"
+								suggestionItems="{suggestionsVARIEDAD>/}" suggest="onSuggest" value="{filterModel>/variedad}">
 								<suggestionItems>
 									<core:Item key="text" text="{suggestionsVARIEDAD>text}"/>
 								</suggestionItems>
@@ -65,8 +66,8 @@
 					<fb:FilterGroupItem groupName="mainfilter" name="calibre" label="{i18n>caliber}" labelTooltip="{i18n>caliber}" partOfCurrentVariant="true"
 						visibleInFilterBar="true">
 						<fb:control>
-							<Input id="filterCalibre" name="filterCalibre" type="Text" submit="onFilter" showSuggestion="true" suggestionItems="{suggestionsCALIBRE>/}"
-								suggest="onSuggest">
+							<Input id="filterCalibre" placeholder="Indique calibre.." name="filterCalibre" type="Text" submit="onFilter" showSuggestion="true" suggestionItems="{suggestionsCALIBRE>/}"
+								suggest="onSuggest" value="{filterModel>/calibre}">
 								<suggestionItems>
 									<core:Item key="text" text="{suggestionsCALIBRE>text}"/>
 								</suggestionItems>
@@ -76,8 +77,8 @@
 					<fb:FilterGroupItem groupName="mainfilter" name="classification" label="{i18n>classification}" labelTooltip="{i18n>classification}"
 						partOfCurrentVariant="true" visibleInFilterBar="true">
 						<fb:control>
-							<Input id="filterClassification" name="filterClassification" type="Text" submit="onFilter" showSuggestion="true"
-								suggestionItems="{suggestionsCLASIFICACION_F_V>/}" suggest="onSuggest">
+							<Input id="filterClassification" placeholder="Indique clasificación.." name="filterClassification" type="Text" submit="onFilter" showSuggestion="true"
+								suggestionItems="{suggestionsCLASIFICACION_F_V>/}" suggest="onSuggest" value="{filterModel>/clasificacion}">
 								<suggestionItems>
 									<core:Item key="text" text="{suggestionsCLASIFICACION_F_V>text}"/>
 								</suggestionItems>
@@ -99,7 +100,7 @@
 								<Title text="Productos"/>
 								<ToolbarSpacer/>
 								
-								<SearchField id="asistenteSearchfield" width="40%" placeholder="Buscar por descripción de material" liveChange=".onSearchMaterial" class="sapUiSmallMargin"/>
+								<SearchField id="asistenteSearchfield" width="40%" placeholder="Buscar por número de material" liveChange=".onSearchMaterial" class="sapUiSmallMargin"/>
 								<!-- Add the Personalization button -->
 								<Button press="navToCart" icon="sap-icon://cart" type="Emphasized" width="4vw"></Button>
 								<Button icon="sap-icon://action-settings" press="onPersoButtonPressed">
@@ -119,6 +120,9 @@
 					<columns>
 						<Column id="botonCol">
 							<Text text="{i18n>add}"/>
+						</Column>
+						<Column id="materialNumberCol" width="20em" hAlign="Center" minScreenWidth="Desktop" demandPopin="true" importance="Low">
+							<Text text="Numero de material"/>
 						</Column>
 						<Column id="materialCol" width="20em" hAlign="Center" minScreenWidth="Desktop" demandPopin="true" importance="Low">
 							<Text text="{i18n>materialDescription}"/>
@@ -161,6 +165,7 @@
 						<ColumnListItem>
 							<cells>
 								<Button icon="sap-icon://cart-3" press="addToCart"/>
+								<Text text="{productos>MATNR}"/>
 								<Text text="{productos>MAKTX}"/>
 								<Text text="{productos>PRECIO}"/>
 								<!--<u:Currency value="{productos>PRECIO}" currency="{productos>MONEDA}" useSymbol="false"/>-->

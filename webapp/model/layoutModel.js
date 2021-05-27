@@ -9,12 +9,12 @@ sap.ui.define([
 			//gets component
 			var component = FioriComponent.getComponent();
 			//gets model
-			var jsonModel = component.byId("app").getModel("filterModel");
+			var jsonModel = component.byId("app").getModel("layoutModel");
 			//checks if the model exists
 			if (!jsonModel) {
 				jsonModel = new JSONModel();
 				jsonModel.setSizeLimit(9999);
-				component.byId("app").setModel(jsonModel, "filterModel");
+				component.byId("app").setModel(jsonModel, "layoutModel");
 			}
 			return jsonModel;
 		},
@@ -22,14 +22,8 @@ sap.ui.define([
 		initializeModel: function () {
 			var jsonModel = this.getModel();
 			jsonModel.setData({
-				lote:"",
-				material: "",
-				especie: "",
-				centro: "",
-				almacen: "",
-				variedad: "",
-				calibre: "",
-				clasificacion: ""
+				tipoFactura: true,
+				condicionPago: true
 			});
 			return jsonModel;
 		},

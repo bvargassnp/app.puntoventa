@@ -29,6 +29,15 @@
 					<ViewSettingsItem text="menor a 10" key="LABST___LT___10" />
 				</items>
 			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem
+				text="Precio"
+				key="PRECIO"
+				multiSelect="false">
+				<items>
+					<ViewSettingsItem text="tiene precio" key="PRECIO___GT___0" />
+					<ViewSettingsItem text="no tiene precio" key="PRECIO___EQ___0" />
+				</items>
+			</ViewSettingsFilterItem>
 		</filterItems>
 	</ViewSettingsDialog>
 </core:FragmentDefinition>
